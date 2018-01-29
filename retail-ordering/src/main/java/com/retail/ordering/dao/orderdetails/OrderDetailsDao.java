@@ -107,14 +107,14 @@ public class OrderDetailsDao extends DaoBase {
 			int count = stmt.executeUpdate();
 			if (count == 1) {
 				conn.commit();
-			} else {
-				throw new UpdateFailedException("Cannot update a dispatched/delivered order. Please create a new order");
+				return orderDetails;
 			}
-			return orderDetails;
 		} catch (final SQLException e) {
 			throw new DatabaseException("Server internal error. Please try again later or contact system administrator",
 					e);
 		}
+		
+		return null;
 	}
 
 	public OrderDetails updateStatus(OrderDetails orderDetails) {

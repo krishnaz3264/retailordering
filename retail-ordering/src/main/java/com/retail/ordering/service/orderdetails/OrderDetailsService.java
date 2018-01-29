@@ -9,6 +9,7 @@ import com.retail.ordering.OrderDetails;
 import com.retail.ordering.dao.orderdetails.OrderDetailsDao;
 import com.retail.ordering.entity.UserDetails;
 import com.retail.ordering.exception.OrderNotFoundException;
+import com.retail.ordering.exception.UpdateFailedException;
 import com.retail.ordering.exception.ValidationException;
 
 public class OrderDetailsService {
@@ -37,7 +38,11 @@ public class OrderDetailsService {
 	public OrderDetails updateQuantity(final OrderDetails orderDetails) {
 		
 		validateUpdateQuantity(orderDetails);
-		return orderDetailsDao.updateQuantity(orderDetails);
+		final OrderDetails updatedOrderDetails = orderDetailsDao.updateQuantity(orderDetails);
+		if(updatedOrderDetails == null) {
+			throw new UpdateFailedException("Cannot update a dispatched/delivered order. Please create a new order");
+		}
+		return updatedOrderDetails;
 	}
 
 	private void validateUpdateQuantity(final OrderDetails orderDetails) {
