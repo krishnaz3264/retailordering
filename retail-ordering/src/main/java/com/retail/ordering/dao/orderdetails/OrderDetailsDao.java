@@ -125,7 +125,7 @@ public class OrderDetailsDao extends DaoBase {
 			final PreparedStatement stmt = conn
 					.prepareStatement("update order_details set status = ? where reference_number = ?");
 			final String status;
-			if (orderDetails.getStatus().equals("O")) {
+			if (orderDetails.getStatus().trim().equalsIgnoreCase("O")) {
 				status = "DI";
 			} else {
 				status = "DL";
@@ -136,6 +136,7 @@ public class OrderDetailsDao extends DaoBase {
 			stmt.executeUpdate();
 			conn.commit();
 			
+			orderDetails.setStatus(status);
 			return orderDetails;
 		} catch (final SQLException e) {
 			throw new DatabaseException("Server internal error. Please try again later or contact system administrator",
