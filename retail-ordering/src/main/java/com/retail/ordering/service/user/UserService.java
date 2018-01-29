@@ -17,15 +17,19 @@ public class UserService {
 	@Inject
 	private UserDao userDao;
 
-	public void authenticateUser(final String authorizationHeader) {
+	public UserDetails authenticateUser(final String authorizationHeader) {
 
 		final String[] credentials = validateHeader(authorizationHeader);
+		return getUserDetails(credentials[0], credentials[1]);
+	}
 
-		final UserDetails user = userDao.getUser(credentials[0], credentials[1]);
+	private UserDetails getUserDetails(final String username, final String password) {
+		final UserDetails user = userDao.getUser(username, password);
 		if (user == null) {
 			LOGGER.error("User not found.");
 			throw new AuthenticationFailureException("Invalid credentials. Please try again");
 		}
+		return user;
 	}
 
 	private String[] validateHeader(final String authorizationHeader) {

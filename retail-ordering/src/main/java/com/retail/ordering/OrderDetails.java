@@ -7,7 +7,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
-public class Order {
+public class OrderDetails {
 
 	@XmlElement
 	private String referenceNumber;
