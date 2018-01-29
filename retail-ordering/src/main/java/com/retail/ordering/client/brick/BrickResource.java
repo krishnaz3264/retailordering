@@ -18,7 +18,7 @@ import com.retail.ordering.OrderDetails;
 import com.retail.ordering.entity.UserDetails;
 import com.retail.ordering.service.orderdetails.OrderDetailsService;
 
-@Path("bricks")
+@Path("bricks/order")
 public class BrickResource {
 	
 	@Inject
@@ -28,7 +28,6 @@ public class BrickResource {
 	private SecurityContext securityContext;
 
 	@POST
-	@Path("order")
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response newOrder(@FormParam("quantity") final int quantity) {
@@ -37,7 +36,7 @@ public class BrickResource {
 	}
 	
 	@POST
-	@Path("order/details")
+	@Path("details")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<OrderDetails> getOrderDetails(final List<String> referenceNumbers) {
@@ -45,7 +44,7 @@ public class BrickResource {
 	}
 	
 	@POST
-	@Path("order/update/quantity")
+	@Path("update/quantity")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response updateQuantity(final OrderDetails orderDetails) {
@@ -54,7 +53,7 @@ public class BrickResource {
 	}
 	
 	@POST
-	@Path("order/update/status")
+	@Path("update/status")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response updateStatus(final OrderDetails orderDetails) {
