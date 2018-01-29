@@ -11,7 +11,7 @@ import com.retail.ordering.exception.UpdateFailedException;
 public class UpdateFailedExceptionMapper implements ExceptionMapper<UpdateFailedException>{
 
 	public Response toResponse(final UpdateFailedException e) {
-		return Response.status(Status.CONFLICT).entity(e.getMessage()).build();
+		return Response.status(Status.BAD_REQUEST).entity(e.getMessage()).build();
 	}
 
 }

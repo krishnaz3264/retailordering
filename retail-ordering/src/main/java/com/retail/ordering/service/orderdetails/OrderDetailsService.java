@@ -37,7 +37,7 @@ public class OrderDetailsService {
 	public OrderDetails updateQuantity(final OrderDetails orderDetails) {
 		
 		validateUpdateQuantity(orderDetails);
-		return orderDetailsDao.update(orderDetails);
+		return orderDetailsDao.updateQuantity(orderDetails);
 	}
 
 	private void validateUpdateQuantity(final OrderDetails orderDetails) {

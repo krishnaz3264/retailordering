@@ -95,7 +95,7 @@ public class OrderDetailsDao extends DaoBase {
 		}
 	}
 
-	public OrderDetails update(final OrderDetails orderDetails) {
+	public OrderDetails updateQuantity(final OrderDetails orderDetails) {
 
 		try (final Connection conn = getConnection()) {
 			conn.setAutoCommit(false);
@@ -108,7 +108,7 @@ public class OrderDetailsDao extends DaoBase {
 			if (count == 1) {
 				conn.commit();
 			} else {
-				throw new UpdateFailedException("Cannot update a dispatched order. Please create a new order");
+				throw new UpdateFailedException("Cannot update a dispatched/delivered order. Please create a new order");
 			}
 			return orderDetails;
 		} catch (final SQLException e) {
