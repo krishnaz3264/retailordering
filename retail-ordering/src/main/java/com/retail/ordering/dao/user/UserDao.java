@@ -5,23 +5,18 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import javax.annotation.Resource;
-import javax.sql.DataSource;
-
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.log4j.Logger;
 
+import com.retail.ordering.dao.DaoBase;
 import com.retail.ordering.entity.UserDetails;
 import com.retail.ordering.exception.DatabaseException;
 
-public class UserDao {
+public class UserDao extends DaoBase {
 
 	private final static String SALT = "!ad#@123sdfskmho&(jhgjh)";
 
 	private static final Logger LOGGER = Logger.getLogger(UserDao.class);
-
-	@Resource(lookup = "jdbc/RetailOrdering")
-	private DataSource dataSource;
 
 	public UserDetails getUser(final String username, final String password) {
 
@@ -42,14 +37,6 @@ public class UserDao {
 		}
 
 		return null;
-	}
-
-	private Connection getConnection() {
-		try {
-			return dataSource.getConnection();
-		} catch (final SQLException e) {
-			throw new DatabaseException("Server internal error. Please try again later or contact system administrator", e);
-		}
 	}
 
 }

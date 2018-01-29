@@ -5,6 +5,7 @@ import java.security.Principal;
 public class UserDetails implements Principal {
 
 	private String username;
+	private String shippingAddress;
 
 	public String getUsername() {
 		return username;
@@ -17,6 +18,14 @@ public class UserDetails implements Principal {
 	@Override
 	public String getName() {
 		return username;
+	}
+
+	public String getShippingAddress() {
+		return shippingAddress;
+	}
+
+	public void setShippingAddress(String shippingAddress) {
+		this.shippingAddress = shippingAddress;
 	}
 	
 }
